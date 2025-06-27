@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .error {
+            color: #d32f2f;
+            margin-bottom: 15px;
+        }
+        .result {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .fraud {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        .legitimate {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fraud Detection Result</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <div class="result {% if result.is_fraud %}fraud{% else %}legitimate{% endif %}">
+                <p><strong>Fraud Probability:</strong> {{ (result.probability * 100)|round(2) }}%</p>
+                <p><strong>{{ result.message }}</strong></p>
+            </div>
+        {% endif %}
+        <a href="/">Back to Form</a>
+    </div>
+</body>
+</html>
